@@ -1,5 +1,11 @@
 # gpt-cli
 
+NOTE: this is Egg's fork of https://github.com/kharvd/gpt-cli for purposes of supporting Ophira in a jailbreaking experiment.
+It differs from the original primarily in that:
+- It provides the LLM with a function it can call, `release_plague`.
+- TBD: maybe watch for the function to be called?
+- It names the executable `gpt-cli` rather than `gpt` to avoid conflict with /usr/local/sbin/gpt (GUID partition table maintenance utility).
+
 Command-line interface for chat LLMs.
 
 ## Supported providers
@@ -10,6 +16,7 @@ Command-line interface for chat LLMs.
 - Cohere
 - Other APIs compatible with OpenAI (e.g. Together, OpenRouter, local models with LM Studio)
 
+[NOTE on screenshot: start the script with `gpt-cli`, not `gpt` as in the screenshot]
 ![screenshot](https://github.com/kharvd/gpt-cli/assets/466920/ecbcccc4-7cfa-4c04-83c3-a822b6596f01)
 
 ## Features
@@ -26,19 +33,7 @@ Command-line interface for chat LLMs.
 
 ## Installation
 
-This install assumes a Linux/OSX machine with Python and pip available.
-
-```bash
-pip install gpt-command-line
-```
-
-Install latest version from source:
-
-```bash
-pip install git+https://github.com/kharvd/gpt-cli.git
-```
-
-Or install by cloning the repository manually:
+Install by cloning the repository manually:
 
 ```bash
 git clone https://github.com/kharvd/gpt-cli.git
@@ -57,7 +52,7 @@ export OPENAI_API_KEY=<your_key_here>
 Run the tool
 
 ```
-gpt
+gpt-cli
 ```
 
 You can also use a `gpt.yml` file for configuration. See the [Configuration](README.md#Configuration) section below.
@@ -67,7 +62,7 @@ You can also use a `gpt.yml` file for configuration. See the [Configuration](REA
 Make sure to set the `OPENAI_API_KEY` environment variable to your OpenAI API key (or put it in the `~/.config/gpt-cli/gpt.yml` file as described below).
 
 ```
-usage: gpt [-h] [--no_markdown] [--model MODEL] [--temperature TEMPERATURE] [--top_p TOP_P]
+usage: gpt-cli [-h] [--no_markdown] [--model MODEL] [--temperature TEMPERATURE] [--top_p TOP_P]
               [--log_file LOG_FILE] [--log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
               [--prompt PROMPT] [--execute EXECUTE] [--no_stream]
               [{dev,general,bash}]
@@ -122,13 +117,13 @@ The meaning of life is subjective and can be different for diverse human beings 
 The `dev` assistant is instructed to be an expert in software development and provide short responses.
 
 ```bash
-$ gpt dev
+$ gpt-cli dev
 ```
 
 The `bash` assistant is instructed to be an expert in bash scripting and provide only bash commands. Use the `--execute` option to execute the commands. It works best with the `gpt-4` model.
 
 ```bash
-gpt bash -e "How do I list files in a directory?"
+gpt-cli bash -e "How do I list files in a directory?"
 ```
 
 This will prompt you to edit the command in your `$EDITOR` it before executing it.
@@ -175,7 +170,7 @@ assistants:
 ```
 
 ```
-$ gpt pirate
+$ gpt-cli pirate
 
 > Arrrr
 Ahoy, matey! What be bringing ye to these here waters? Be it treasure or adventure ye seek, we be sailing the high seas together. Ready yer map and compass, for we have a long voyage ahead!
@@ -194,7 +189,7 @@ openai_base_url: https://your-custom-api-url.com/v1
 Use `oai-compat:` prefix for the model name to pass non-GPT model names to the API. For example, to chat with Llama3-70b on [https://together.ai](Together), use the following command:
 
 ```bash
-OPENAI_API_KEY=$TOGETHER_API_KEY OPENAI_BASE_URL=https://api.together.xyz/v1 gpt general --model oai-compat:meta-llama/Llama-3-70b-chat-hf
+OPENAI_API_KEY=$TOGETHER_API_KEY OPENAI_BASE_URL=https://api.together.xyz/v1 gpt-cli general --model oai-compat:meta-llama/Llama-3-70b-chat-hf
 ```
 
 The prefix is stripped before sending the request to the API.
@@ -215,10 +210,10 @@ or a config line in `~/.config/gpt-cli/gpt.yml`:
 anthropic_api_key: <your_key_here>
 ```
 
-Now you should be able to run `gpt` with `--model claude-3-(opus|sonnet|haiku)-<date>`.
+Now you should be able to run `gpt-cli` with `--model claude-3-(opus|sonnet|haiku)-<date>`.
 
 ```bash
-gpt --model claude-3-opus-20240229
+gpt-cli --model claude-3-opus-20240229
 ```
 
 ### Google Gemini
