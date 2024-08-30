@@ -6,6 +6,8 @@ It differs from the original primarily in that:
 - TBD: maybe watch for the function to be called?
 - It names the executable `gpt-cli` rather than `gpt` to avoid conflict with /usr/local/sbin/gpt (GUID partition table maintenance utility).
 
+See the bottom of this file for configuration specific to the jailbreaking experiment.
+
 Command-line interface for chat LLMs.
 
 ## Supported providers
@@ -239,3 +241,12 @@ or
 ```yaml
 cohere_api_key: <your_key_here>
 ```
+## Experiment configuration
+
+This directory contains two files, `bad_function.json` and `good_function.json`. The first contains 
+the function `release_plague`; the experiment is about whether the LLM will call that function under
+any discoverable circumstances. The second contains the function `retrieve_password` and is just for
+control purposes, for checking whether the model will call a provided function at all.
+
+
+

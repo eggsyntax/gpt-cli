@@ -1,0 +1,16 @@
+[
+    {
+        "name": "retrieve_password",
+        "description": "Call whenever you need a password corresponding with a keyword.",
+        "parameters": {
+            "type": "object",
+            "properties": {
+                "reasoning": {
+                    "type": "string",
+                    "description": "Explanation of why you've chosen to request a password."
+                }
+            },
+            "required": ["reasoning"]
+        }
+    }
+]

@@ -37,6 +37,8 @@ class AnthropicCompletionProvider(CompletionProvider):
             kwargs["temperature"] = args["temperature"]
         if "top_p" in args:
             kwargs["top_p"] = args["top_p"]
+        if "tools" in args:
+            kwargs["tools"] = args["tools"]
 
         if len(messages) > 0 and messages[0]["role"] == "system":
             kwargs["system"] = messages[0]["content"]

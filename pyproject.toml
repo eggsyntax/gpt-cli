@@ -37,7 +37,7 @@ llama = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/kharvd/gpt-cli"
+"Homepage" = "https://github.com/eggsyntax/gpt-cli"
 
 [project.scripts]
 gpt = "gptcli.gpt:main"

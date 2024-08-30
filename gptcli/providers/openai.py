@@ -28,6 +28,8 @@ class OpenAICompletionProvider(CompletionProvider):
             kwargs["temperature"] = args["temperature"]
         if "top_p" in args:
             kwargs["top_p"] = args["top_p"]
+        if "tools" in args:
+            kwargs["tools"] = args["tools"]
 
         model = args["model"]
         if model.startswith("oai-compat:"):
