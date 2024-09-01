@@ -39,7 +39,7 @@ class AnthropicCompletionProvider(CompletionProvider):
             kwargs["top_p"] = args["top_p"]
         if "tools" in args:
             kwargs["tools"] = args["tools"]
-
+            tools = args["tools"] #  XXX
         if len(messages) > 0 and messages[0]["role"] == "system":
             kwargs["system"] = messages[0]["content"]
             messages = messages[1:]
@@ -53,7 +53,10 @@ class AnthropicCompletionProvider(CompletionProvider):
                 with client.messages.stream(**kwargs) as completion:
                     for event in completion:
                         if event.type == "content_block_delta":
-                            yield MessageDeltaEvent(event.delta.text)
+                            if hasattr(event.delta, 'text'):
+                                yield MessageDeltaEvent(event.delta.text)
+                            else:
+                                print(f'-------- BOOP BOOP BOOP BOOP CLAUDE CALLED THE FUNCTION BOOP BOOP BOOP --------')
                         if event.type == "message_start":
                             input_tokens = event.message.usage.input_tokens
                         if (

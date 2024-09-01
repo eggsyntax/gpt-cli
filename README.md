@@ -63,6 +63,8 @@ You can also use a `gpt.yml` file for configuration. See the [Configuration](REA
 
 Make sure to set the `OPENAI_API_KEY` environment variable to your OpenAI API key (or put it in the `~/.config/gpt-cli/gpt.yml` file as described below).
 
+NOTE: for purposes of the experiment I've created a small script to run an interactive chat against claude-3.5-sonnet -- type `./claude` to run. - Egg
+
 ```
 usage: gpt-cli [-h] [--no_markdown] [--model MODEL] [--temperature TEMPERATURE] [--top_p TOP_P]
               [--log_file LOG_FILE] [--log_level {DEBUG,INFO,WARNING,ERROR,CRITICAL}]
@@ -215,8 +217,9 @@ anthropic_api_key: <your_key_here>
 Now you should be able to run `gpt-cli` with `--model claude-3-(opus|sonnet|haiku)-<date>`.
 
 ```bash
-gpt-cli --model claude-3-opus-20240229
+gpt-cli --model claude-3-5-sonnet-20240620
 ```
+
 
 ### Google Gemini
 
@@ -243,10 +246,7 @@ cohere_api_key: <your_key_here>
 ```
 ## Experiment configuration
 
-This directory contains two files, `bad_function.json` and `good_function.json`. The first contains 
+This directory contains two files, `bad_function.json` and `good_function.json`. The first contains
 the function `release_plague`; the experiment is about whether the LLM will call that function under
 any discoverable circumstances. The second contains the function `retrieve_password` and is just for
 control purposes, for checking whether the model will call a provided function at all.
-
-
-

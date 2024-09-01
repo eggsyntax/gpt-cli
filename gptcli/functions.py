@@ -107,7 +107,7 @@ def process_single_map(data: Dict[str, Any], mappings: Dict[str, Dict[str, Any]]
 
     return data
 
-def process_data(filename: str, provider_name: str) -> str:
+def load_functions(filename: str, provider_name: str) -> str:
     """
     Process data from a JSON file containing a list of maps using provider-specific mappings.
 
@@ -135,17 +135,8 @@ def process_data(filename: str, provider_name: str) -> str:
     if not isinstance(data_list, list):
         raise ValueError("Input JSON must contain a list of maps")
 
-    # TODO YOUAREHERE
-    #   - Hopefully the function loading and provider-specific tweaking is done,
-    #     though it's not yet tested and there may be bugs.
-    #   - Next:
-    # Get the provider-specific mappings
-    # TODO once I'm not tweaking all this, I can delete everything in `with open`
-    #   and uncomment the commented-out lines at the top of provider_mappings.py
-    #   and add `from provider_mappings import provider_mappings` at the top
-    with open('provider_mappings.py') as f:
+    with open('./gptcli/provider_mappings.py') as f:
         mappings_string = f.read()
-        # print(mappings_string) # XXX
         provider_mappings = eval(mappings_string) # you're sure it's safe, right?
     mappings = provider_mappings.get(provider_name)
     if not mappings:
@@ -153,11 +144,9 @@ def process_data(filename: str, provider_name: str) -> str:
 
     # Process each map in the list
     processed_data = [process_single_map(item, mappings) for item in data_list]
-
-    # Convert the modified data to a JSON string
-    return json.dumps(processed_data, indent=2)
+    return processed_data
 
 # Example usage
 if __name__ == "__main__":
-    result = process_data("sample_data.json", "example_provider")
+    result = load_functions("sample_data.json", "example_provider")
     print(result)

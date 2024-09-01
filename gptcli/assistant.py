@@ -10,6 +10,7 @@ from gptcli.completion import (
     ModelOverrides,
     Message,
 )
+from gptcli.functions import load_functions
 from gptcli.providers.google import GoogleCompletionProvider
 from gptcli.providers.llama import LLaMACompletionProvider
 from gptcli.providers.openai import OpenAICompletionProvider
@@ -122,12 +123,16 @@ class Assistant:
     ) -> Iterator[CompletionEvent]:
         model = self._param("model", override_params)
         completion_provider = get_completion_provider(model)
+        # TODO stop hardcoding function name and provider name
+        #   (& make sure to load at runtime)
+        functions = load_functions("bad_function.json", "anthropic")
         return completion_provider.complete(
             messages,
             {
                 "model": model,
                 "temperature": float(self._param("temperature", override_params)),
                 "top_p": float(self._param("top_p", override_params)),
+                "tools": functions,
             },
             stream,
         )
