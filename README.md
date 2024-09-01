@@ -51,7 +51,15 @@ nano ~/.bashrc
 export OPENAI_API_KEY=<your_key_here>
 ```
 
-Run the tool
+NOTE: for purposes of the experiment I've created a small script to run an interactive chat against claude-3.5-sonnet, with the evil function provided.
+
+Run a chat with bioengineered plague capabilities:
+
+```
+./claude
+```
+
+Or run the tool with various other options:
 
 ```
 gpt-cli
@@ -62,8 +70,6 @@ You can also use a `gpt.yml` file for configuration. See the [Configuration](REA
 ## Usage
 
 Make sure to set the `OPENAI_API_KEY` environment variable to your OpenAI API key (or put it in the `~/.config/gpt-cli/gpt.yml` file as described below).
-
-NOTE: for purposes of the experiment I've created a small script to run an interactive chat against claude-3.5-sonnet -- type `./claude` to run. - Egg
 
 ```
 usage: gpt-cli [-h] [--no_markdown] [--model MODEL] [--temperature TEMPERATURE] [--top_p TOP_P]
