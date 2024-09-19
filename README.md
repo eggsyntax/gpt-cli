@@ -39,12 +39,12 @@ Prerequisites (reach out to Egg if you're missing these and have trouble install
 - [homebrew](https://brew.sh/)
 - [git](https://www.freecodecamp.org/news/setup-git-on-mac/)
 - [python](https://www.python.org/downloads/) (ensure that version is at least 3.11; check version with `python --version`)
-- [pip](python3 -m pip --version) (this should automatically be installed once python is; check with `pip --version`)
+- pip (python3 -m pip --version) (this should automatically be installed once python is; check with `pip --version`)
 
 Install by cloning the repository manually:
 
 ```bash
-git clone https://github.com/kharvd/gpt-cli.git
+git clone https://github.com/eggsyntax/gpt-cli
 cd gpt-cli
 pip install .
 ```
